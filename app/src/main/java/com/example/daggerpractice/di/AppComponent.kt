@@ -2,6 +2,7 @@ package com.example.daggerpractice.di
 
 import android.app.Application
 import com.example.daggerpractice.App
+import com.example.daggerpractice.SessionManager
 import com.example.daggerpractice.di.module.ActivityBuildersModule
 import com.example.daggerpractice.di.module.AppModule
 import com.example.daggerpractice.di.module.ViewModelProviderModule
@@ -19,6 +20,8 @@ import javax.inject.Singleton
     ViewModelProviderModule::class]
 )
 interface AppComponent: AndroidInjector<App> {
+
+    fun sessionManager(): SessionManager
 
     @Component.Builder
     interface Builder {

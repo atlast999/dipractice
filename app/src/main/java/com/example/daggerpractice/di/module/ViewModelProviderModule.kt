@@ -6,10 +6,10 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-abstract class ViewModelProviderModule {
+interface ViewModelProviderModule {
 
     @Binds
-    abstract fun bindViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.AndroidViewModelFactory
+    fun bindViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.AndroidViewModelFactory
 
 //    @ViewModelKey(AuthViewModel::class)
 //    @IntoMap
