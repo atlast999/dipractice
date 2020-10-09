@@ -16,6 +16,7 @@ import com.example.daggerpractice.model.Resource
 import com.example.daggerpractice.util.VerticalItemDecaration
 import com.example.daggerpractice.vm.ViewModelFactory
 import dagger.android.support.DaggerFragment
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_posts.view.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -29,6 +30,8 @@ class PostsFragment: DaggerFragment() {
     lateinit var postsAdapter: PostsAdapter
     @Inject
     lateinit var factory: ViewModelFactory
+
+    val disposable = CompositeDisposable()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,6 +56,7 @@ class PostsFragment: DaggerFragment() {
         viewModel.getLivePosts().observe(viewLifecycleOwner, Observer {
             if(it.status == Resource.AuthStatus.SUCCESS){
                 postsAdapter.setPosts(it.data!!)
+
             } else{
                 Timber.i("Cant get posts")
             }

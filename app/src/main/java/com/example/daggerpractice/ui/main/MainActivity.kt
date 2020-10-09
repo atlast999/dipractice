@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
@@ -22,12 +21,11 @@ class MainActivity: BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         initDrawer()
-    }
 
+    }
     private fun initDrawer(){
         NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, navController)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -47,5 +45,6 @@ class MainActivity: BaseActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController, binding.drawerLayout)
+
     }
 }

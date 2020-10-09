@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.IntRange
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
@@ -14,6 +16,8 @@ import com.example.daggerpractice.model.User
 import com.example.daggerpractice.vm.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_profile.view.*
+import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 class ProfileFragment: DaggerFragment() {
@@ -38,11 +42,25 @@ class ProfileFragment: DaggerFragment() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ProfileViewModel::class.java)
         subscribeObserver()
     }
+//    val SECONDS: Long = 1000
+//    val MINUTES = SECONDS * 60
+//    val HOURS = MINUTES * 60
+//    val DAY = HOURS * 24
+//    private fun getRemainingToExpected(@IntRange(from = 1, to = 24) expectedTime: Int): Long {
+//        val now = Calendar.getInstance()
+//        val expected = Calendar.getInstance()
+//        expected.timeInMillis = now.timeInMillis + DAY
+//        expected[Calendar.HOUR_OF_DAY] = expectedTime
+//        expected[Calendar.MINUTE] = 0
+//        val res = expected.timeInMillis - now.timeInMillis
+//        Timber.d("Remaining time: %d", res / HOURS)
+//        return res
+//    }
 
     private fun subscribeObserver(){
         viewModel.getLiveUser().removeObservers(viewLifecycleOwner)
-        viewModel.getLiveUser().observe(viewLifecycleOwner, Observer {
-            when(it.status){
+        viewModel.getLiveUser().observe(viewLifecycleOwner, {
+            when (it.status) {
                 Resource.AuthStatus.SUCCESS -> setUserDetail(it.data)
                 Resource.AuthStatus.ERROR -> setError(it.message)
                 else -> setError("Something wrong")

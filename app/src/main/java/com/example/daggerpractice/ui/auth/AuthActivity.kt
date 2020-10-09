@@ -23,21 +23,24 @@ class AuthActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+    @Inject
+    lateinit var viewModelFactory2: ViewModelFactory
 
     @Inject
     lateinit var logo: Drawable
     @Inject
     lateinit var requestManager: RequestManager
 
-
     private lateinit var binding: ActivityAuthBinding
     private lateinit var viewModel: AuthViewModel
+    private lateinit var viewModel2: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_auth)
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(AuthViewModel::class.java)
+        viewModel2 = ViewModelProviders.of(this, viewModelFactory2).get(AuthViewModel::class.java)
 
         binding.loginButton.setOnClickListener { attemptLogin() }
 
@@ -45,7 +48,7 @@ class AuthActivity : DaggerAppCompatActivity() {
 
         subscribeObservers()
 
-        Timber.i(viewModelFactory.toString())
+
     }
 
     private fun subscribeObservers() {

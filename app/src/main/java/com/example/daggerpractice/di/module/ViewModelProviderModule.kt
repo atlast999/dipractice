@@ -1,6 +1,7 @@
 package com.example.daggerpractice.di.module
 
 import androidx.lifecycle.ViewModelProvider
+import com.example.daggerpractice.di.annotation.AuthScope
 import com.example.daggerpractice.vm.ViewModelFactory
 import dagger.Binds
 import dagger.Module
@@ -8,6 +9,7 @@ import dagger.Module
 @Module
 interface ViewModelProviderModule {
 
+//    @AuthScope
     @Binds
     fun bindViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.AndroidViewModelFactory
 

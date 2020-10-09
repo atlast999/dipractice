@@ -35,7 +35,7 @@ class PostsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    inner class PostViewHolder(@NonNull itemView: View): RecyclerView.ViewHolder(itemView) {
+    class PostViewHolder(@NonNull itemView: View): RecyclerView.ViewHolder(itemView) {
         var title: TextView = itemView.findViewById(R.id.title)
         fun bind(post: Post) {
             title.text = post.title
